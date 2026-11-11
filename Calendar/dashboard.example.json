@@ -1,0 +1,35 @@
+{
+  "views": [
+    {
+      "title": "Yanke Planner",
+      "path": "planner",
+      "type": "panel",
+      "icon": "mdi:calendar-outline",
+      "cards": [
+        {
+          "type": "custom:yanke-planner-card",
+          "entities": [
+            {
+              "entity": "calendar.personal",
+              "name": "Personal",
+              "accent_color": "#a9c7ff",
+              "label": "mdi:account-outline"
+            },
+            {
+              "entity": "calendar.family",
+              "name": "Family",
+              "accent_color": "#efb2ce",
+              "label": "mdi:account-group-outline"
+            },
+            {
+              "entity": "calendar.waste",
+              "name": "Waste",
+              "accent_color": "#d4eb78",
+              "label": "mdi:trash-can-outline"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
