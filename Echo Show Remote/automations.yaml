@@ -1,0 +1,86 @@
+# The two Home Assistant automations the skill relies on.
+# Replace YOUR-LONG-RANDOM-WEBHOOK-ID with your own long random string (it acts as the password),
+# and the entity IDs with your Apple TV and Echo Show.
+
+- alias: "Office Remote: Echo Show commands"
+  description: >-
+    Receives button presses from the Office Remote Alexa skill and runs them on the Apple TV.
+    Only the listed commands and apps the Apple TV reports are accepted.
+  mode: queued
+  max: 10
+  triggers:
+    - trigger: webhook
+      webhook_id: YOUR-LONG-RANDOM-WEBHOOK-ID
+      allowed_methods: [POST]
+      local_only: false
+  variables:
+    kind: "{{ trigger.json.type | default('') }}"
+    command: "{{ trigger.json.command | default('') }}"
+  actions:
+    - choose:
+        - conditions:
+            - "{{ kind == 'remote' and command in ['up', 'down', 'left', 'right', 'select', 'menu', 'home', 'play_pause', 'skip_backward', 'skip_forward', 'volume_up', 'volume_down'] }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.office
+              data:
+                command: "{{ command }}"
+        - conditions:
+            - "{{ kind == 'app' and command in (state_attr('media_player.office', 'source_list') or []) }}"
+          sequence:
+            - action: media_player.select_source
+              target:
+                entity_id: media_player.office
+              data:
+                source: "{{ command }}"
+        - conditions:
+            - "{{ kind == 'power' and command == 'off' }}"
+          sequence:
+            # Not remote.turn_off: on the Apple TV integration that disconnects Home Assistant.
+            - action: media_player.turn_off
+              target:
+                entity_id: media_player.office
+        - conditions:
+            - "{{ kind == 'power' and command == 'on' }}"
+          sequence:
+            - action: media_player.turn_on
+              target:
+                entity_id: media_player.office
+
+- alias: "Office Remote: show on Echo Show"
+  description: >-
+    Opens the skill on the Echo Show when the Apple TV turns on (through Alexa Media Player),
+    and returns the Echo Show to its home screen when the Apple TV turns off.
+  mode: restart
+  triggers:
+    - trigger: media_player.turned_on
+      target:
+        entity_id: media_player.office
+      id: tv_on
+    - trigger: media_player.turned_off
+      target:
+        entity_id: media_player.office
+      id: tv_off
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: tv_on
+          sequence:
+            - action: media_player.play_media
+              target:
+                entity_id: media_player.your_echo_show
+              data:
+                media_content_type: custom
+                media_content_id: open office remote
+        - conditions:
+            - condition: trigger
+              id: tv_off
+          sequence:
+            - action: media_player.play_media
+              target:
+                entity_id: media_player.your_echo_show
+              data:
+                media_content_type: custom
+                media_content_id: go home

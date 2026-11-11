@@ -1,0 +1,292 @@
+{
+  "type": "APL",
+  "version": "1.6",
+  "theme": "dark",
+  "settings": { "idleTimeout": 1800000 },
+  "graphics": {
+    "chevron": {
+      "type": "AVG",
+      "version": "1.1",
+      "width": 48,
+      "height": 48,
+      "parameters": [{ "name": "rot", "type": "number", "default": 0 }],
+      "items": [
+        {
+          "type": "group",
+          "rotation": "${rot}",
+          "pivotX": 24,
+          "pivotY": 24,
+          "items": [
+            {
+              "type": "path",
+              "pathData": "M12,30 L24,18 L36,30",
+              "stroke": "#F2EFE8",
+              "strokeWidth": 4,
+              "strokeLineCap": "round",
+              "strokeLineJoin": "round"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "layouts": {
+    "Key": {
+      "parameters": [
+        { "name": "label", "type": "string" },
+        { "name": "kind", "type": "string", "default": "remote" },
+        { "name": "value", "type": "string" },
+        { "name": "w", "type": "dimension", "default": 131 },
+        { "name": "h", "type": "dimension", "default": 76 },
+        { "name": "bg", "type": "color", "default": "#1B2220" },
+        { "name": "fg", "type": "color", "default": "#F2EFE8" },
+        { "name": "size", "type": "dimension", "default": 20 }
+      ],
+      "item": {
+        "type": "TouchWrapper",
+        "width": "${w}",
+        "height": "${h}",
+        "onDown": [{ "type": "SetValue", "property": "opacity", "value": 0.45 }],
+        "onUp": [{ "type": "SetValue", "property": "opacity", "value": 1 }],
+        "onPress": [{ "type": "SendEvent", "arguments": ["${kind}", "${value}"] }],
+        "item": {
+          "type": "Frame",
+          "width": "100%",
+          "height": "100%",
+          "backgroundColor": "${bg}",
+          "borderRadius": 16,
+          "borderWidth": 1,
+          "borderColor": "#303B38",
+          "item": {
+            "type": "Text",
+            "width": "100%",
+            "height": "100%",
+            "text": "${label}",
+            "color": "${fg}",
+            "fontSize": "${size}",
+            "fontWeight": "600",
+            "textAlign": "center",
+            "textAlignVertical": "center",
+            "maxLines": 1
+          }
+        }
+      }
+    },
+    "ArrowKey": {
+      "parameters": [
+        { "name": "value", "type": "string" },
+        { "name": "rot", "type": "number", "default": 0 }
+      ],
+      "item": {
+        "type": "TouchWrapper",
+        "width": 96,
+        "height": 96,
+        "onDown": [{ "type": "SetValue", "property": "opacity", "value": 0.45 }],
+        "onUp": [{ "type": "SetValue", "property": "opacity", "value": 1 }],
+        "onPress": [{ "type": "SendEvent", "arguments": ["remote", "${value}"] }],
+        "item": {
+          "type": "Frame",
+          "width": "100%",
+          "height": "100%",
+          "backgroundColor": "#1B2220",
+          "borderRadius": 24,
+          "borderWidth": 1,
+          "borderColor": "#303B38",
+          "item": {
+            "type": "Container",
+            "width": "100%",
+            "height": "100%",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "items": [
+              { "type": "VectorGraphic", "source": "chevron", "width": 56, "height": 56, "rot": "${rot}" }
+            ]
+          }
+        }
+      }
+    },
+    "Gap": {
+      "item": { "type": "Container", "width": 96, "height": 96 }
+    }
+  },
+  "mainTemplate": {
+    "parameters": ["payload"],
+    "items": [
+      {
+        "type": "Container",
+        "width": "100vw",
+        "height": "100vh",
+        "alignItems": "center",
+        "justifyContent": "center",
+        "items": [
+          {
+            "type": "Frame",
+            "position": "absolute",
+            "left": 0,
+            "top": 0,
+            "width": "100vw",
+            "height": "100vh",
+            "backgroundColor": "#0D1110"
+          },
+          {
+        "type": "Container",
+        "width": 960,
+        "height": 480,
+        "transform": [{ "scale": "${Math.min(viewport.width / 960, viewport.height / 480)}" }],
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 12,
+        "paddingBottom": 12,
+        "justifyContent": "spaceBetween",
+        "items": [
+          {
+            "type": "Container",
+            "direction": "row",
+            "width": "100%",
+            "height": 44,
+            "alignItems": "center",
+            "justifyContent": "spaceBetween",
+            "items": [
+              {
+                "type": "Text",
+                "text": "${payload.title}",
+                "color": "#8E9A95",
+                "fontSize": 16,
+                "fontWeight": "600",
+                "letterSpacing": 2
+              },
+              { "type": "Key", "label": "TURN OFF", "kind": "power", "value": "off", "w": 150, "h": 44, "bg": "#3A1D1A", "fg": "#FFB4A8", "size": 15 }
+            ]
+          },
+          {
+            "type": "Container",
+            "direction": "row",
+            "width": "100%",
+            "height": 334,
+            "alignItems": "center",
+            "justifyContent": "spaceBetween",
+            "items": [
+              {
+                "type": "Container",
+                "width": 304,
+                "height": 304,
+                "justifyContent": "spaceBetween",
+                "items": [
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 304,
+                    "height": 96,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "Gap" },
+                      { "type": "ArrowKey", "value": "up", "rot": 0 },
+                      { "type": "Gap" }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 304,
+                    "height": 96,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "ArrowKey", "value": "left", "rot": -90 },
+                      { "type": "Key", "label": "OK", "value": "select", "w": 96, "h": 96, "bg": "#E8A33D", "fg": "#14110A", "size": 24 },
+                      { "type": "ArrowKey", "value": "right", "rot": 90 }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 304,
+                    "height": 96,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "Gap" },
+                      { "type": "ArrowKey", "value": "down", "rot": 180 },
+                      { "type": "Gap" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Container",
+                "width": 272,
+                "height": 334,
+                "justifyContent": "spaceBetween",
+                "items": [
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 272,
+                    "height": 76,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "Key", "label": "BACK", "value": "menu" },
+                      { "type": "Key", "label": "HOME", "value": "home" }
+                    ]
+                  },
+                  { "type": "Key", "label": "PLAY / PAUSE", "value": "play_pause", "w": 272, "bg": "#26302D" },
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 272,
+                    "height": 76,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "Key", "label": "« 10 s", "value": "skip_backward" },
+                      { "type": "Key", "label": "10 s »", "value": "skip_forward" }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "width": 272,
+                    "height": 76,
+                    "justifyContent": "spaceBetween",
+                    "items": [
+                      { "type": "Key", "label": "VOL −", "value": "volume_down" },
+                      { "type": "Key", "label": "VOL +", "value": "volume_up" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "wrap": "wrap",
+                "width": 296,
+                "height": 324,
+                "data": "${payload.apps}",
+                "items": [
+                  {
+                    "type": "Container",
+                    "width": 148,
+                    "height": 108,
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                    "items": [
+                      { "type": "Key", "label": "${data.label}", "kind": "app", "value": "${data.source}", "w": 140, "h": 100, "size": 18 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Text",
+            "width": "100%",
+            "height": 22,
+            "text": "${payload.hint}",
+            "color": "#5E6965",
+            "fontSize": 13,
+            "textAlign": "center"
+          }
+        ]
+          }
+        ]
+      }
+    ]
+  }
+}

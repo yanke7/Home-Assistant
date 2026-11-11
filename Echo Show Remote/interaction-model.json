@@ -1,0 +1,42 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "office remote",
+      "intents": [
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
+        {
+          "name": "CommandIntent",
+          "slots": [{ "name": "command", "type": "REMOTE_COMMAND" }],
+          "samples": [
+            "press {command}",
+            "to press {command}",
+            "hit {command}",
+            "go {command}",
+            "to go {command}",
+            "{command}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "REMOTE_COMMAND",
+          "values": [
+            { "id": "up", "name": { "value": "up" } },
+            { "id": "down", "name": { "value": "down" } },
+            { "id": "left", "name": { "value": "left" } },
+            { "id": "right", "name": { "value": "right" } },
+            { "id": "select", "name": { "value": "select", "synonyms": ["okay", "enter", "choose"] } },
+            { "id": "menu", "name": { "value": "back", "synonyms": ["menu", "go back"] } },
+            { "id": "home", "name": { "value": "home", "synonyms": ["home screen"] } },
+            { "id": "play_pause", "name": { "value": "play", "synonyms": ["pause", "resume", "play pause"] } },
+            { "id": "volume_up", "name": { "value": "volume up", "synonyms": ["louder", "turn it up"] } },
+            { "id": "volume_down", "name": { "value": "volume down", "synonyms": ["quieter", "turn it down"] } }
+          ]
+        }
+      ]
+    }
+  }
+}
