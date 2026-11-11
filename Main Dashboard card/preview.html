@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{margin:0;padding:20px;background:#0c100d;font-family:system-ui}ha-icon{display:inline-block;width:var(--mdc-icon-size,24px);height:var(--mdc-icon-size,24px);border-radius:50%;border:2px solid currentColor;box-sizing:border-box}</style>
+<div id="host"></div>
+<script>
+const q=new URLSearchParams(location.search),sc=q.get('s')||'night';
+const P={Moss:['#101611','#1b251c','#28372a','#f1f5eb','#bdcbb8','#d0e997','#16200d'],Linen:['#f2eee4','#fffcf5','#e9e0cf','#272820','#53584a','#52652c','#ffffff'],Indigo:['#111524','#1c2439','#2c3650','#f0f3ff','#bcc8e6','#a9c0ff','#172344']};
+window.YankeAppearance={apply(h){const n=q.get('p')||'Moss',p=P[n],light=n==='Linen';const v={bg:p[0],surface:p[1],raised:p[2],text:p[3],muted:p[4],accent:p[5],line:light?'#9aa6a5':'#65776c',shadow:light?'#00000018':'#00000035',success:light?'#22633b':'#a6e4b8',warning:light?'#805100':'#ffd091',danger:light?'#a22535':'#ffb5bd',scale:'1',scheme:light?'light':'dark'};for(const k in v)h.style.setProperty('--yanke-'+k,v[k]);document.body.style.background=p[0];}};
+const S={night:{el:-30,wx:'clear-night',lock:'unlocked',door:'on',alarm:'disarmed',on:0},snow:{el:-30,wx:'snowy',lock:'locked',door:'off',alarm:'armed_night',on:2},day:{el:40,wx:'sunny',lock:'locked',door:'off',alarm:'disarmed',on:3},dusk:{el:2,wx:'partlycloudy',lock:'locked',door:'off',alarm:'armed_home',on:1,act:'heating'},rain:{el:30,wx:'rainy',lock:'jammed',door:'off',alarm:'triggered',on:0}}[sc];
+const st={'sun.sun':{state:'x',attributes:{elevation:S.el,rising:false}},'weather.forecast_home':{state:S.wx,attributes:{temperature:-7.4}},'alarm_control_panel.qolsys_panel_system':{state:S.alarm,attributes:{}},'lock.smart_lock':{state:S.lock,attributes:{}},'binary_sensor.qolsys_panel_front_door':{state:S.door,attributes:{}},'climate.hallway_alarm_com_smart_thermostat':{state:'heat',attributes:{current_temperature:22,hvac_action:S.act||'idle'}}};
+['light.hallway_hallway','light.office_office_light','switch.love_lamp'].slice(0,S.on).forEach(id=>st[id]={state:'on',attributes:{}});
+</script>
+<script src="yanke-pulse-card.js"></script>
+<script>const c=document.createElement('yanke-pulse-card');c.setConfig({});document.getElementById('host').append(c);c.hass={states:st,config:{time_zone:'America/Regina'},locale:{language:'en',time_format:'language'},user:{name:'Kris Yanke'}};</script>
