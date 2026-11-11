@@ -1,0 +1,15 @@
+{
+  "views": [
+    {
+      "title": "Living light",
+      "path": "lights",
+      "type": "panel",
+      "icon": "mdi:lightbulb-group",
+      "cards": [
+        {
+          "type": "custom:yanke-light2-card"
+        }
+      ]
+    }
+  ]
+}

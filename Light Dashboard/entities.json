@@ -1,0 +1,12 @@
+{
+  "kitchen": "switch.quectel_matter_product",
+  "love": "switch.love_lamp",
+  "office": "light.office_office_light",
+  "hall": "light.hallway_hallway",
+  "bed": "light.bedroom_smart_led_classic_a19_cri90",
+  "lamp": "light.smart_wi_fi_surge_protector_outlet_2",
+  "elara": "switch.quectel_matter_product_2",
+  "outside": "light.outside_outside_light",
+  "entry": "light.outside_entrance_way",
+  "driveway": "light.driveway_floodlight"
+}
