@@ -1,0 +1,15 @@
+{
+  "views": [
+    {
+      "title": "Yanke Home",
+      "path": "home",
+      "type": "panel",
+      "icon": "mdi:home-outline",
+      "cards": [
+        {
+          "type": "custom:yanke-home-card"
+        }
+      ]
+    }
+  ]
+}
