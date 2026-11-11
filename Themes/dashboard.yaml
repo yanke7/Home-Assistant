@@ -1,0 +1,7 @@
+views:
+  - title: Appearance
+    path: settings
+    type: panel
+    icon: mdi:palette-outline
+    cards:
+      - type: custom:yanke-appearance-card
