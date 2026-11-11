@@ -1,0 +1,14 @@
+{
+  "views": [
+    {
+      "title": "Security",
+      "path": "overview",
+      "type": "panel",
+      "cards": [
+        {
+          "type": "custom:yanke-security-console"
+        }
+      ]
+    }
+  ]
+}
