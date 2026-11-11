@@ -1,0 +1,200 @@
+{
+  "netflix_tv": {
+    "alias": "Netflix TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "Netflix"
+        }
+      }
+    ]
+  },
+  "disney_tv": {
+    "alias": "Disney TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "Disney+"
+        }
+      }
+    ]
+  },
+  "paramount_tv": {
+    "alias": "Paramount TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "Paramount+"
+        }
+      }
+    ]
+  },
+  "prime_video_tv": {
+    "alias": "Prime Video TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "Prime Video"
+        }
+      }
+    ]
+  },
+  "you_tube_tv": {
+    "alias": "You Tube TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "YouTube"
+        }
+      }
+    ]
+  },
+  "setting_tv": {
+    "alias": "Setting TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "wakeup"
+        }
+      },
+      {
+        "action": "media_player.select_source",
+        "target": {
+          "entity_id": "media_player.office"
+        },
+        "data": {
+          "source": "Settings"
+        }
+      }
+    ]
+  },
+  "mac_sleep": {
+    "alias": "Mac Sleep",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "button.press",
+        "target": {
+          "entity_id": "button.example_macbook_sleep"
+        }
+      }
+    ]
+  },
+  "office_cam": {
+    "alias": "Office Cam",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "button.press",
+        "target": {
+          "entity_id": "button.example_macbook_office_cameras"
+        }
+      }
+    ]
+  },
+  "play_tv": {
+    "alias": "Play TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "play"
+        }
+      }
+    ]
+  },
+  "pause_tv": {
+    "alias": "Pause TV",
+    "mode": "single",
+    "sequence": [
+      {
+        "action": "remote.send_command",
+        "target": {
+          "entity_id": "remote.office"
+        },
+        "data": {
+          "command": "pause"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+mac2mqtt.yaml
+.env*
+*.log
+*.app/
+.DS_Store
+mac2mqtt/mac2mqtt
+mac2mqtt/office-mirroring

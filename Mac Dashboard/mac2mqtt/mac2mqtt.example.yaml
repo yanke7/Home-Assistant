@@ -1,0 +1,4 @@
+mqtt_ip: "BROKER_HOSTNAME"
+mqtt_port: "1883"
+mqtt_user: "REPLACE_WITH_MQTT_USERNAME"
+mqtt_password: "REPLACE_WITH_MQTT_PASSWORD"

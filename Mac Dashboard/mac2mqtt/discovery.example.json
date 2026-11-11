@@ -1,0 +1,270 @@
+[
+  {
+    "topic": "homeassistant/binary_sensor/mac2mqtt_example_macbook/connection/config",
+    "payload": {
+      "name": "Connection",
+      "device_class": "connectivity",
+      "state_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_on": "true",
+      "payload_off": "false",
+      "unique_id": "mac2mqtt_example_macbook_connection",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      }
+    }
+  },
+  {
+    "topic": "homeassistant/sensor/mac2mqtt_example_macbook/battery/config",
+    "payload": {
+      "name": "Battery",
+      "device_class": "battery",
+      "unit_of_measurement": "%",
+      "state_class": "measurement",
+      "state_topic": "mac2mqtt/Example-MacBook/status/battery",
+      "unique_id": "mac2mqtt_example_macbook_battery",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/number/mac2mqtt_example_macbook/volume/config",
+    "payload": {
+      "name": "Volume",
+      "icon": "mdi:volume-high",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "mode": "slider",
+      "state_topic": "mac2mqtt/Example-MacBook/status/volume",
+      "command_topic": "mac2mqtt/Example-MacBook/command/volume",
+      "unique_id": "mac2mqtt_example_macbook_volume",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/switch/mac2mqtt_example_macbook/mute/config",
+    "payload": {
+      "name": "Mute",
+      "icon": "mdi:volume-mute",
+      "state_topic": "mac2mqtt/Example-MacBook/status/mute",
+      "command_topic": "mac2mqtt/Example-MacBook/command/mute",
+      "payload_on": "true",
+      "payload_off": "false",
+      "unique_id": "mac2mqtt_example_macbook_mute",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/sleep/config",
+    "payload": {
+      "name": "Sleep",
+      "icon": "mdi:sleep",
+      "command_topic": "mac2mqtt/Example-MacBook/command/sleep",
+      "payload_press": "sleep",
+      "unique_id": "mac2mqtt_example_macbook_sleep",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/displaysleep/config",
+    "payload": {
+      "name": "Turn off display",
+      "icon": "mdi:monitor-off",
+      "command_topic": "mac2mqtt/Example-MacBook/command/displaysleep",
+      "payload_press": "displaysleep",
+      "unique_id": "mac2mqtt_example_macbook_displaysleep",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/shutdown/config",
+    "payload": {
+      "name": "Shut down",
+      "icon": "mdi:power",
+      "command_topic": "mac2mqtt/Example-MacBook/command/shutdown",
+      "payload_press": "shutdown",
+      "unique_id": "mac2mqtt_example_macbook_shutdown",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/displaywake/config",
+    "payload": {
+      "name": "Wake display",
+      "icon": "mdi:monitor",
+      "command_topic": "mac2mqtt/Example-MacBook/command/displaywake",
+      "payload_press": "displaywake",
+      "unique_id": "mac2mqtt_example_macbook_displaywake",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0 + display wake"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/mirroring_start/config",
+    "payload": {
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0 + display wake + Office mirroring"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false",
+      "name": "Start Office mirroring",
+      "icon": "mdi:cast",
+      "unique_id": "mac2mqtt_example_macbook_mirroring_start",
+      "command_topic": "mac2mqtt/Example-MacBook/command/mirroring",
+      "payload_press": "start"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/mirroring_stop/config",
+    "payload": {
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0 + display wake + Office mirroring"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false",
+      "name": "Stop Office mirroring",
+      "icon": "mdi:cast-off",
+      "unique_id": "mac2mqtt_example_macbook_mirroring_stop",
+      "command_topic": "mac2mqtt/Example-MacBook/command/mirroring",
+      "payload_press": "stop"
+    }
+  },
+  {
+    "topic": "homeassistant/sensor/mac2mqtt_example_macbook/mirroring_action/config",
+    "payload": {
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro",
+        "sw_version": "mac2mqtt 1.4.0 + display wake + Office mirroring"
+      },
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false",
+      "name": "Mirroring last result",
+      "icon": "mdi:information-outline",
+      "unique_id": "mac2mqtt_example_macbook_mirroring_action",
+      "state_topic": "mac2mqtt/Example-MacBook/status/mirroring_action",
+      "entity_category": "diagnostic"
+    }
+  },
+  {
+    "topic": "homeassistant/button/mac2mqtt_example_macbook/office_cameras/config",
+    "payload": {
+      "name": "Office cameras",
+      "icon": "mdi:cctv",
+      "unique_id": "mac2mqtt_example_macbook_office_cameras",
+      "command_topic": "mac2mqtt/Example-MacBook/command/mirroring",
+      "payload_press": "cameras",
+      "availability_topic": "mac2mqtt/Example-MacBook/status/alive",
+      "payload_available": "true",
+      "payload_not_available": "false",
+      "device": {
+        "identifiers": [
+          "mac2mqtt_example_macbook"
+        ],
+        "name": "Example MacBook",
+        "manufacturer": "Apple",
+        "model": "MacBook Pro"
+      }
+    }
+  }
+]

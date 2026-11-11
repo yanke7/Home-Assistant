@@ -1,0 +1,15 @@
+{
+  "title": "Mac Control",
+  "views": [
+    {
+      "title": "Mac",
+      "path": "mac",
+      "type": "panel",
+      "cards": [
+        {
+          "type": "custom:yanke-mac-studio"
+        }
+      ]
+    }
+  ]
+}
