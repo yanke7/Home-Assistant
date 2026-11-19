@@ -1,5 +1,7 @@
 # Network dashboard
 
+> **Current release** — Network Control now lives in [yanke7/Home-Assistant-Network](https://github.com/yanke7/Home-Assistant-Network). Install it through Home Assistant Marketplace or HACS and follow the new setup guide. This page documents the original dashboard.
+
 A compact, responsive Home Assistant network console with dark styling and cyan accents.
 
 - Download, upload and latency readings
