@@ -1,5 +1,7 @@
 # Fable Sun Moon
 
+> **This project now lives in [Home Assistant Almanac](https://github.com/yanke7/Home-Assistant-Almanac).** Use the standalone repository for Marketplace/HACS installation, releases, documentation, and issues. The files below are the original snapshot.
+
 Almanac: a self-contained sun and moon dashboard card for Home Assistant.
 
 It computes the sun and moon positions itself from your Home Assistant location and time zone, so it needs no entities and calls no services.
