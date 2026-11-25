@@ -16,11 +16,17 @@ function label(service) {
     : "Unknown");
 }
 
-function graph(service, detailed = false) {
+function graph(service, detailed = false, locale) {
   const rows = service.history || [];
   const successful = rows.filter((row) => row[1] === "ok");
   if (!successful.length) return `<div class="no-chart">${service.signal === "Feed only" ? "Provider feed only" : "No response time history yet"}</div>`;
-  const max = Math.max(50, (service.baseline || 0) * 1.2, ...successful.map((row) => row[2])) * 1.04;
+  const readings = successful.map((row) => row[2]);
+  const peak = Math.max(...readings);
+  const limit = Math.max(50, (service.baseline || 0) * 1.2, peak) * 1.04;
+  const tickSize = 10 ** Math.floor(Math.log10(limit / 4));
+  const max = detailed ? Math.ceil(limit / tickSize) * tickSize : limit;
+  const ticks = [0, 1, 2, 3, 4];
+  const format = (number) => number.toLocaleString(locale, {maximumFractionDigits:2});
   const now = Date.now() / 1000, height = detailed ? 120 : 26;
   // Reachability checks can back off to four polling intervals. The monitor
   // considers a reading fresh for five intervals, including scheduling jitter.
@@ -36,11 +42,17 @@ function graph(service, detailed = false) {
     previous = time;
   }
   const baseline = height - 2 - (height - 4) * service.baseline / max;
-  return `<svg class="chart" viewBox="0 0 320 ${height}" preserveAspectRatio="none" role="img" aria-label="Response time over 24 hours">
-      ${detailed ? [0, 1, 2, 3, 4].map((i) => `<path class="gridline" d="M${i * 80} 0v${height} M0 ${i * height / 4}h320"/>`).join("") : ""}
+  const chart = `<svg class="chart" viewBox="0 0 320 ${height}" preserveAspectRatio="none" role="img" aria-label="Response time over 24 hours">
+      ${detailed ? ticks.map((i) => `<path class="gridline" d="M${i * 80} 0v${height} M0 ${2 + i * (height - 4) / 4}h320"/>`).join("") : ""}
       ${detailed && service.baseline != null ? `<path class="baseline" d="M0 ${baseline}h320"/>` : ""}
-      <path class="trace" d="${path}"/>${dots}${single}</svg>
-      ${detailed ? '<div class="axis"><span>24h ago</span><span>12h ago</span><span>Now</span></div>' : ""}`;
+      <path class="trace" d="${path}"/>${dots}${single}</svg>`;
+  if (!detailed) return chart;
+  return `<div class="response-chart">
+      <div class="response-scale" aria-hidden="true">${ticks.map((i) => `<span>${format(max * (4 - i) / 4)} ms</span>`).join("")}</div>
+      ${chart}
+      <div class="axis"><span>24h ago</span><span>12h ago</span><span>Now</span></div>
+      <div class="muted response-range">${format(Math.min(...readings))}–${format(peak)} ms</div>
+    </div>`;
 }
 
 const SPEED_SENSORS = [
@@ -944,6 +956,11 @@ class OutageWatchCard extends HTMLElement {
       .plot {border:1px solid #636d75;padding:10px;border-radius:9px;background:radial-gradient(ellipse at center,#202f3d,#11171d);box-shadow:inset 0 0 9px #000}
       .plot .row {margin-bottom:9px}
       .axis {font-size:11px;margin-top:5px}
+      .response-chart {display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px}
+      .response-chart .chart {height:120px}
+      .response-chart .axis {grid-column:2}
+      .response-scale {display:flex;flex-direction:column;justify-content:space-between;color:var(--muted);font-size:11px;text-align:end;white-space:nowrap;font-variant-numeric:tabular-nums}
+      .response-range {grid-column:2;margin-top:4px;font-variant-numeric:tabular-nums}
       .chips {display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
       .chips span {font-size:12px;color:#151619;font-weight:700;border:1px solid #e2e3e4;background:linear-gradient(#c6c9cb,#858b91);padding:5px 8px;border-radius:5px;box-shadow:0 2px 3px #0009}
       .detail a {border-color:#8db2dc;text-decoration:none;padding:7px 9px;font-size:13px;box-shadow:inset 0 0 0 2px #15191e,0 0 8px #75adff55}
@@ -1555,7 +1572,7 @@ class OutageWatchCard extends HTMLElement {
         ${selected ? `<aside class="detail"><div class="row"><h2 class="identity">${icons(selected.icon || "link-variant")}${escape(selected.name)}</h2><button aria-label="Close details" data-action="close">×</button></div>
           <div><span class="pill ${escape(selected.status)}">${label(selected)}</span><p class="muted">${selected.reason === "unreachable" ? "Home Assistant could not reach this endpoint." : selected.signal === "Checks only" ? "This tile reflects checks from your network." : escape(selected.signal)}</p></div>
           ${selected.incident ? `<p data-provider-text>${escape(selected.incident)}</p>` : ""}
-          <div class="plot"><div class="row"><h3>Response time · 24 hours</h3>${selected.baseline == null ? "" : `<span class="muted">Baseline ${escape(selected.baseline)} ms</span>`}</div>${graph(selected,true)}</div>
+          <div class="plot"><div class="row"><h3>Response time · 24 hours</h3>${selected.baseline == null ? "" : `<span class="muted">Baseline ${escape(selected.baseline)} ms</span>`}</div>${graph(selected,true,this.language)}</div>
           ${selected.components?.length ? `<div><h3>Affected components</h3><div class="chips">${selected.components.map((name) => `<span>${escape(name)}</span>`).join("")}</div></div>` : ""}
           <p class="muted">Last successful feed update ${timestamp(selected.feed_checked,this.language)}</p>
           <div class="actions">${link(selected.official, selected.name === "Spotify" ? "Spotify ongoing issues" : "Official status")}${link(selected.crowd,"Downdetector")}</div>

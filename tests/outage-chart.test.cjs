@@ -22,3 +22,13 @@ for (const detailed of [false, true]) {
     assert.deepEqual(trace([[0], [1200], [3600]]), ["MLM", 1]);
   });
 }
+
+test("detail chart shows a labeled scale and actual successful reading range", () => {
+  const chart = context.graph({
+    history: [[start, "ok", 120], [start + 300, "failed", 0], [start + 600, "ok", 450]],
+  }, true, "en");
+  assert.match(chart, /<span>500 ms<\/span>/);
+  assert.match(chart, /<span>0 ms<\/span>/);
+  assert.match(chart, /120–450 ms/);
+  assert.doesNotMatch(context.graph({history: [[start, "ok", 120]]}), /response-scale/);
+});

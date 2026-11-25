@@ -107,7 +107,7 @@ class Monitor:
             connector=aiohttp.TCPConnector(resolver=self.resolver, limit=8),
             timeout=aiohttp.ClientTimeout(total=10),
             cookie_jar=aiohttp.DummyCookieJar(),
-            headers={"User-Agent": "OutageMap/0.2.12 (+https://github.com/yanke7/Home-Assistant)"},
+            headers={"User-Agent": "OutageMap/0.2.14 (+https://github.com/yanke7/Home-Assistant)"},
         )
         for service in self.services.values():
             self.schedule(service)
