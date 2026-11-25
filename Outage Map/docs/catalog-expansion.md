@@ -35,5 +35,8 @@ Each candidate was checked from the Home Assistant host. Successful website chec
 | Pluto TV | Checks only | HTTP 200 |
 | DAZN | Checks only | HTTP 200 |
 | The Roku Channel | Checks only | HTTP 200 |
+| Ubiquiti / UniFi | Feed only | Official JSON summary returned HTTP 200; no unresolved incidents parsed |
+| Bambu Lab | Feed only | Official JSON summary returned HTTP 200; no unresolved incidents parsed |
+| Oura | Feed only | Official JSON summary returned HTTP 200; no unresolved incidents parsed |
 
-Candidates left out include Alexa and Xbox (no verified provider signal), TIDAL and HBO Max (HTTP 403 from the test host), and services whose tested URLs returned errors or only exposed marketing pages.
+Candidates left out include Alexa and Xbox (no verified provider signal), TIDAL and HBO Max (HTTP 403 from the test host), Tibber (its page-level indicator reports `major` for single third-party integrations such as one car brand, which would mark the whole service down), and services whose tested URLs returned errors or only exposed marketing pages.
